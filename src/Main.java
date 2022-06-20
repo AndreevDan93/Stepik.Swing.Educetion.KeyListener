@@ -15,7 +15,7 @@ public class Main extends JFrame implements KeyListener {
     static int imageSize = 50;
     static Image background;
 
-    public Main (){
+    public Main() {
         addKeyListener(this);
     }
 
@@ -26,7 +26,6 @@ public class Main extends JFrame implements KeyListener {
         window.add(painting);
 
         window.setVisible(true);
-
 
 
     }
@@ -47,17 +46,26 @@ public class Main extends JFrame implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case  KeyEvent.VK_A:
-                backgroundX = backgroundX - imageSize;
+            case KeyEvent.VK_A:
+                if (backgroundX > 0)
+                    backgroundX = backgroundX - imageSize;
+                else backgroundX = weight;
                 break;
             case KeyEvent.VK_D:
+                if (backgroundX < weight - imageSize)
                 backgroundX = backgroundX + imageSize;
+                else backgroundX = 0;
                 break;
             case KeyEvent.VK_W:
+                if (backgroundY > 0)
                 backgroundY = backgroundY - imageSize;
+                else backgroundY = height;
                 break;
             case KeyEvent.VK_S:
-                backgroundY = backgroundY + imageSize;
+                if (backgroundY < height - imageSize)
+                    backgroundY = backgroundY + imageSize;
+                else backgroundY = 0;
+
                 break;
 
 
@@ -77,7 +85,6 @@ public class Main extends JFrame implements KeyListener {
 
             g.drawImage(background, backgroundX, backgroundY, null);
             repaint();
-
 
 
         }
