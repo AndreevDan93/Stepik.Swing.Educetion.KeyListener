@@ -1,14 +1,11 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends JFrame implements KeyListener, MouseListener {
+public class Main extends JFrame implements KeyListener, MouseListener, MouseWheelListener {
     static Main window = new Main();
     static int backgroundX = 0;
     static int backgroundY = 0;
@@ -20,6 +17,7 @@ public class Main extends JFrame implements KeyListener, MouseListener {
     public Main() {
         addKeyListener(this);
         addMouseListener(this);
+        addMouseWheelListener(this);
     }
 
     public static void main(String[] args) throws IOException {
@@ -48,28 +46,33 @@ public class Main extends JFrame implements KeyListener, MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int imageV;
+        if (e.isShiftDown()) imageV = 5 * imageSize;
+        else imageV = imageSize;
+
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_A:
                 if (backgroundX > 0)
-                    backgroundX = backgroundX - imageSize;
+                    backgroundX = backgroundX - imageV;
                 else backgroundX = weight;
                 break;
             case KeyEvent.VK_D:
                 if (backgroundX < weight - imageSize)
-                backgroundX = backgroundX + imageSize;
+                    backgroundX = backgroundX + imageV;
                 else backgroundX = 0;
                 break;
             case KeyEvent.VK_W:
                 if (backgroundY > 0)
-                backgroundY = backgroundY - imageSize;
+                    backgroundY = backgroundY - imageV;
                 else backgroundY = height;
                 break;
             case KeyEvent.VK_S:
                 if (backgroundY < height - imageSize)
-                    backgroundY = backgroundY + imageSize;
+                    backgroundY = backgroundY + imageV;
                 else backgroundY = 0;
-
                 break;
+
 
 
         }
@@ -93,6 +96,7 @@ public class Main extends JFrame implements KeyListener, MouseListener {
         backgroundX = x;
         backgroundY = y;
 
+
     }
 
     @Override
@@ -103,12 +107,22 @@ public class Main extends JFrame implements KeyListener, MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
 
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
 
     }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.isAltDown())
+            backgroundY = backgroundX + imageSize;
+
+
+    }
+
 
     private static class Painting extends JPanel {
         @Override
