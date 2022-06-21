@@ -3,10 +3,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
-public class Main extends JFrame implements KeyListener {
+public class Main extends JFrame implements KeyListener, MouseListener {
     static Main window = new Main();
     static int backgroundX = 0;
     static int backgroundY = 0;
@@ -17,6 +19,7 @@ public class Main extends JFrame implements KeyListener {
 
     public Main() {
         addKeyListener(this);
+        addMouseListener(this);
     }
 
     public static void main(String[] args) throws IOException {
@@ -75,6 +78,35 @@ public class Main extends JFrame implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        backgroundX = x;
+        backgroundY = y;
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 
