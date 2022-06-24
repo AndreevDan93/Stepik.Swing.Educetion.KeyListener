@@ -2,8 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main extends JFrame implements KeyListener, MouseListener, MouseWheelListener {
     static Main window = new Main();
@@ -22,7 +22,7 @@ public class Main extends JFrame implements KeyListener, MouseListener, MouseWhe
 
     public static void main(String[] args) throws IOException {
         initFrame();
-        background = ImageIO.read(Main.class.getResourceAsStream("background.jpg"));
+        background = ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("background.jpg")));
         Painting painting = new Painting();
         window.add(painting);
 
