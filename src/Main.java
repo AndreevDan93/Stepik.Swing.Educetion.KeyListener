@@ -74,7 +74,6 @@ public class Main extends JFrame implements KeyListener, MouseListener, MouseWhe
                 break;
 
 
-
         }
 
     }
@@ -91,10 +90,21 @@ public class Main extends JFrame implements KeyListener, MouseListener, MouseWhe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
-        backgroundX = x;
-        backgroundY = y;
+
+
+        if (e.getButton() == MouseEvent.BUTTON1){
+            int x = e.getX();
+            int y = e.getY();
+            backgroundX = x;
+            backgroundY = y;
+        }
+        if (e.getButton() == MouseEvent.BUTTON3){
+            backgroundX = 2000;
+            backgroundY = 2000;
+
+
+        }
+
 
 
     }
@@ -107,7 +117,6 @@ public class Main extends JFrame implements KeyListener, MouseListener, MouseWhe
     @Override
     public void mouseEntered(MouseEvent e) {
 
-
     }
 
     @Override
@@ -117,9 +126,6 @@ public class Main extends JFrame implements KeyListener, MouseListener, MouseWhe
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        if (e.isAltDown())
-            backgroundY = backgroundX + imageSize;
-
 
     }
 
